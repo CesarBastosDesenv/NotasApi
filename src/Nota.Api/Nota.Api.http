@@ -1,0 +1,6 @@
+@Nota.Api_HostAddress = http://localhost:5053
+
+GET {{Nota.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
