@@ -33,7 +33,7 @@ private readonly ApiContext _context;
                        Where(x => x.Id == Id).FirstOrDefaultAsync();
     }
 
-    public async Task<PagedList<Tarefa>> BuscaVeiculo(int pageNumber, int pageSize)
+    public async Task<PagedList<Tarefa>> BuscaTarefa(int pageNumber, int pageSize)
     {
         var query = _context.Tarefas.AsQueryable();
         return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);

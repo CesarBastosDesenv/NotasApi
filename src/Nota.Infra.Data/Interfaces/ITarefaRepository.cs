@@ -6,7 +6,7 @@ namespace Nota.Infra.Data.Interfaces;
 
 public interface ITarefaRepository
 {
-    Task<PagedList<Tarefa>> BuscaVeiculo(int pageNumber, int pageSize);
+    Task<PagedList<Tarefa>> BuscaTarefa(int pageNumber, int pageSize);
     Task<Tarefa> BuscaTarefaId(Guid Id);
     void AdicionarTarefa(Tarefa tarefa);
     void AtualizarTarefa(Tarefa tarefa);

@@ -1,5 +1,5 @@
-//using Nota.application.Interfaces;
-//using Nota.application.Services;
+using Nota.application.Interfaces;
+using Nota.application.Services;
 using Nota.Infra.Data.Context;
 using Nota.Infra.Data.Interfaces;
 using Nota.Infra.Data.Repositories;
@@ -24,7 +24,23 @@ builder.Services.AddDbContext<ApiContext>(Options => {
                       Options.UseSqlServer(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
                    });
 
+builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();      
+builder.Services.AddScoped<ITarefaService, TarefaService>();
+
+builder.Services.AddCors(
+    options => {
+        options.AddPolicy("cors",builder => {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
+    }
+);
+
 var app = builder.Build();
+
+app.UseCors("cors");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -37,6 +53,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers().AllowAnonymous();;
 
 app.Run();
